@@ -8,6 +8,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import TrackPlayer from 'react-native-track-player';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,6 +19,20 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+
+  componentWillMount() {
+
+    TrackPlayer.setupPlayer().then(async () => {
+      // Adds a track to the queue
+      await TrackPlayer.add({
+        id: 'trackId',
+        url: 'https://rss.art19.com/episodes/fdc93151-0cdb-4e93-a94a-6252d225a2e2.mp3',
+        title: 'Track Title',
+        artist: 'Track Artist',
+      });
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
